@@ -6,8 +6,8 @@
 
 ```bash
 brew tap-new j5pu/tools
-cd $(brew --repository j5pu/critic)
-git remote add origin https://github.com/j5pu/homebrew-critic
+cd $(brew --repository j5pu/tools)
+git remote add origin https://github.com/j5pu/homebrew-tools
 git push --set-upstream origin main
 ```
 
@@ -25,14 +25,49 @@ is responsible for bottle uploading and publishing.
 ### Creating formula, edit, audit and test.
 All formulae should go in the `Formula` directory.
 
+#### URL with tags
 ````bash
 url="https://github.com/j5pu/critic/archive/refs/tags/v0.1.0.tar.gz"
-brew create --tap=j5pu/critic "${url/ref\/tags\//}"  # creates a Formula/critic.rb
+brew create --tap=j5pu/tools "${url/ref\/tags\//}"  # creates a Formula/critic.rb
 ````
+
+#### URL with No tags
+Creates a Formula/critic.rb.
+````bash
+repo="https://github.com/Checksum/critic.sh"
+commit="$( git ls-remote "${repo}" HEAD | awk '{print $1}' )" # get revision
+url="${repo}/archive/${commit}.tar.gz"
+sha256="$( wget --quiet -O - "${tar}" | sha256sum  | awk '{print $1}' )"
+brew create --tap=j5pu/tools --set-name critic "${url}"
+````
+
+or
+
+```ruby
+class Critic < Formula
+  desc "Dead simple testing framework for Bash with coverage reporting"
+  homepage "https://github.com/Checksum/critic.sh"
+  url <== "${url}"
+  sha256 <== "${sha256}"
+  version_scheme 1
+  license "MIT"
+
+  depends_on "bash"
+
+  def install
+    bin.install "critic.sh" => "critic"
+  end
+
+  test do
+    system "true"
+  end
+end
+
+```
 
 * Edit: `brew edit j5pu/critic/critic`
 * Audit: `brew audit --quiet --new critic`
-* Test: `/usr/local/bin/brew install --quiet j5pu/critic/critic; brew test --quiet critic`
+* Test: `/usr/local/bin/brew install --quiet j5pu/tools/critic; brew test --quiet critic`
 
 ### Branch, add formula, commit and push.
 ````bash
@@ -89,7 +124,7 @@ template: |
       end
 
       test do
-        system "true"
+        `#{bin}/critic`
       end
     end
 ```
@@ -144,6 +179,89 @@ test do
 end
 ```
 
+## [Doppler](https://dashboard.doppler.com/workplace/c1b6617234eb28e014bd/projects/default/configs/default)
+
+```bash
+doppler --silent --configuration $(brew prefix)/etc/doppler.yml login
+doppler --silent --configuration $(brew prefix)/etc/doppler.yml setup
+doppler --silent --configuration $(brew prefix)/etc/doppler.yml secrets --json
+doppler --silent --configuration $(brew prefix)/etc/doppler.yml secrets --only-names --json
+doppler --silent --configuration $(brew prefix)/etc/doppler.yml secrets --raw --json
+doppler --silent --configuration $(brew prefix)/etc/doppler.yml secrets --raw --no-read-env --json
+doppler --silent --configuration $(brew prefix)/etc/doppler.yml secrets get GITHUB_WORK_TOKEN --json
+doppler --silent --configuration $(brew prefix)/etc/doppler.yml secrets upload secrets.sh
+```
+A secret `D="${C}"` cannot reference another secret `C="${A}_${B}"` which references other secrets `A="hola";B="adios"`.
+
+
+### [jq]
+```bash
+doppler --configuration /config/doppler/doppler.yml --silent secrets --json | \
+  jq -r '. | to_entries[]  | "export \(.key)='\''\(.value.computed)'\''"'
+```
+
+### [Templating](https://pkg.go.dev/text/template)
+```yaml
+{{/* Comments won't be shown in the output. */}}
+bind: {{.DOPPLER_CONFIG}}
+port: {{.DOPPLER_ENVIRONMENT}}
+{{/* The `logfile` field will only be shown if the GITHUB_ORG_TOKEN secret is defined */}}
+{{with .GITHUB_ORG_TOKEN}}
+logfile: {{.}}
+{{end}}
+access:
+  user: {{.GITHUB_USER_TOKEN}}
+  password: {{.GITHUB_WORK_TOKEN}}
+```
+
+```bash
+doppler --silent --configuration $(brew prefix)/etc/doppler.yml secrets substitute template.yml --output out.yml
+```
+
+```yaml
+
+bind: default
+port: default
+
+
+logfile: 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
+
+access:
+  user: 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
+  password: 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
+```
+
+### [Parsing with json and from json multiline or add dicts to yaml](https://docs.doppler.com/docs/secret-injection-with-templates)
+```text
+┌─────────────────────┬──────────────────────────────────────────────────────────────────┐
+│ NAME                │ VALUE                                                            │
+├─────────────────────┼──────────────────────────────────────────────────────────────────┤
+│ ACCESS              │ {"user": "admin", "password": "uRJ5WhRmSZF4dgkk82Kp"}            │
+│ PRIVATE_KEY         │ -----BEGIN RSA PRIVATE KEY-----                                  │
+│                     │ MIIJJwIBAAKCAgEAww6PISGwwCRj125/5CNQ5kntc/NdjA7EKmNPY1wol/8ZSgrl │
+│                     │ H2Egpj7GghDCsJfoJ7gQu3OtYQJ2j1/txGP44tzZh/lraMQblFqc9r9N8xXU3Y6z │
+│                     │ ...                                                              │
+│                     │ -----END RSA PRIVATE KEY-----                                    │
+│                     │                                                                  │
+└─────────────────────┴──────────────────────────────────────────────────────────────────┘
+```
+
+```yaml
+private_key: {{tojson .PRIVATE_KEY}}
+{{with fromjson .ACCESS}}
+access:
+  user: {{.user}}
+  password: {{.password}}
+{{end}}
+```
+
+```bash
+$ dopler secrets substitute example.txt
+private_key: "-----BEGIN RSA PRIVATE KEY-----\r\nMIIJJwIBAAKCAgEAww6PISGwwCRj125/5CNQ5knt..."
+access:
+  user: admin
+  password: uRJ5WhRmSZF4dgkk82Kp
+````
 
 ## See also
 
@@ -152,10 +270,17 @@ end
   a git tag, a changelog and a git release, all in one command.
   * [GitVersion](https://gitversion.net/docs/usage/) - From git log to SemVer in no time.
 
-### Brew Releaser
+### GitHub Actions and Apps
   * [Tap Release](https://github.com/toolmantim/tap-release) - Automatically update Homebrew taps when you publish 
   new releases to GitHub. Built with Probot.
-
+  * [GitHub MarketPlace Homebrew Actions](https://github.com/marketplace?type=actions&query=Homebrew+)
+  * [Doppler](https://github.com/marketplace/doppler-secrets-manager) - Doppler is the single source of truth 
+  for your secrets. 
+  * [Homebrew Releaser](https://github.com/marketplace/actions/homebrew-releaser) - Release scripts, binaries, and 
+  executables directly to Homebrew via GitHub Actions (creates the formula).
+  * [Homebrew bump formula](https://github.com/marketplace/actions/homebrew-bump-formula) - Homebrew bump formula 
+  GitHub Action (updates the formula).
+  
 ### Taps
   * [github.com/egilsster/git-releaser tap](https://github.com/egilsster/homebrew-git-releaser) 
   * [yandex-weather-cli Makefile](https://github.com/msoap/yandex-weather-cli/blob/master/README.md) - Man page 
@@ -192,7 +317,8 @@ git clone https://github.com/Homebrew/linuxbrew-core.git; cd linuxbrew-core/Form
   * [Brew FAQ](https://docs.brew.sh/FAQ)
   * [External Commands](https://docs.brew.sh/External-Commands)
   * [tap-uploaded-to-github-releases](https://brew.sh/2020/11/18/homebrew-tap-with-bottles-uploaded-to-github-releases/)
-
+  * [Homebrew/actions](https://github.com/Homebrew/actions) - Homebrew's GitHub Actions.
+  
 ### How-To
   * [create-custom-github-action](https://www.philschmid.de/create-custom-github-action-in-4-steps)
   * [Automate your build & release](https://faun.pub/automate-your-build-release-with-github-actions-367c0febf5fd)

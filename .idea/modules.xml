@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/homebrew-tools.iml" filepath="$PROJECT_DIR$/.idea/homebrew-tools.iml" />
-      <module fileurl="file:///usr/local/.idea/local.iml" filepath="/usr/local/.idea/local.iml" />
     </modules>
   </component>
 </project>
