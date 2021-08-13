@@ -265,11 +265,6 @@ access:
 
 ## See also
 
-### Releaser
-  * [github.com/egilsster/git-releaser](https://github.com/egilsster/git-releaser) - A CLI tool to that creates 
-  a git tag, a changelog and a git release, all in one command.
-  * [GitVersion](https://gitversion.net/docs/usage/) - From git log to SemVer in no time.
-
 ### GitHub Actions and Apps
   * [Tap Release](https://github.com/toolmantim/tap-release) - Automatically update Homebrew taps when you publish 
   new releases to GitHub. Built with Probot.
@@ -280,7 +275,7 @@ access:
   executables directly to Homebrew via GitHub Actions (creates the formula).
   * [Homebrew bump formula](https://github.com/marketplace/actions/homebrew-bump-formula) - Homebrew bump formula 
   GitHub Action (updates the formula).
-  
+
 ### Taps
   * [github.com/egilsster/git-releaser tap](https://github.com/egilsster/homebrew-git-releaser) 
   * [yandex-weather-cli Makefile](https://github.com/msoap/yandex-weather-cli/blob/master/README.md) - Man page 
