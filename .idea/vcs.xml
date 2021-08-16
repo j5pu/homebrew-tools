@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="VcsDirectoryMappings">
-    <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="" vcs="Git" />
+    <mapping directory="$USER_HOME$/g" vcs="Git" />
+    <mapping directory="$USER_HOME$/icons-mac" vcs="Git" />
+    <mapping directory="$USER_HOME$/paper" vcs="Git" />
+    <mapping directory="$USER_HOME$/scripts" vcs="Git" />
   </component>
 </project>

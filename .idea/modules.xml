@@ -2,7 +2,12 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$USER_HOME$/fonts/.idea/fonts.iml" filepath="$USER_HOME$/fonts/.idea/fonts.iml" />
+      <module fileurl="file://$USER_HOME$/g/.idea/g.iml" filepath="$USER_HOME$/g/.idea/g.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/homebrew-tools.iml" filepath="$PROJECT_DIR$/.idea/homebrew-tools.iml" />
+      <module fileurl="file://$USER_HOME$/icons-mac/.idea/icons-mac.iml" filepath="$USER_HOME$/icons-mac/.idea/icons-mac.iml" />
+      <module fileurl="file://$USER_HOME$/paper/.idea/paper.iml" filepath="$USER_HOME$/paper/.idea/paper.iml" />
+      <module fileurl="file://$USER_HOME$/scripts/.idea/scripts.iml" filepath="$USER_HOME$/scripts/.idea/scripts.iml" />
     </modules>
   </component>
 </project>

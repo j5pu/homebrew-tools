@@ -224,11 +224,11 @@ bind: default
 port: default
 
 
-logfile: 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
+logfile: ...
 
 access:
-  user: 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
-  password: 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
+  user: ...
+  password: ...
 ```
 
 ### [Parsing with json and from json multiline or add dicts to yaml](https://docs.doppler.com/docs/secret-injection-with-templates)
@@ -297,10 +297,7 @@ access:
   * [homebrew-cask-fonts](https://github.com/Homebrew/homebrew-cask-fonts)
 
 ### [Formulas](https://github.com/Homebrew/homebrew-core/tree/master/Formula)
-````bash
-git clone https://github.com/Homebrew/homebrew-core.git; cd homebrew-core/Formula
-git clone https://github.com/Homebrew/linuxbrew-core.git; cd linuxbrew-core/Formula
-````
+  * [Large Example Formula](https://github.com/syhw/homebrew/blob/master/Library/Contributions/example-formula.rb)
   * [fzf](https://github.com/Homebrew/homebrew-core/blob/master/Formula/fzf.rb)
   * [bash](https://github.com/Homebrew/homebrew-core/blob/master/Formula/bash.rb)
   * [bash-completion@2](https://github.com/Homebrew/homebrew-core/blob/master/Formula/bash-completion%402.rb)
@@ -313,21 +310,3 @@ git clone https://github.com/Homebrew/linuxbrew-core.git; cd linuxbrew-core/Form
   * [External Commands](https://docs.brew.sh/External-Commands)
   * [tap-uploaded-to-github-releases](https://brew.sh/2020/11/18/homebrew-tap-with-bottles-uploaded-to-github-releases/)
   * [Homebrew/actions](https://github.com/Homebrew/actions) - Homebrew's GitHub Actions.
-  
-### How-To
-  * [create-custom-github-action](https://www.philschmid.de/create-custom-github-action-in-4-steps)
-  * [Automate your build & release](https://faun.pub/automate-your-build-release-with-github-actions-367c0febf5fd)
-  * [Automating PyPI releases](https://www.caktusgroup.com/blog/2021/02/11/automating-pypi-releases/)
-  * [Publishing PyPI package distribution](https://packaging.python.org/guides/publishing-package-distribution-releases-using-github-actions-ci-cd-workflows/)
-  * [Setting up python-semantic-release](https://python-semantic-release.readthedocs.io/en/latest/automatic-releases/github-actions.html)
-  * [PyPI publish GitHub Action](https://github.com/pypa/gh-action-pypi-publish)
-  * [Automate your build & release](https://faun.pub/automate-your-build-release-with-github-actions-367c0febf5fd)
-
-### Actions
-  * [critic.sh - Bash Test](https://github.com/Checksum/critic.sh/blob/master/.github/workflows/main.yml)
-
-### GitHub
-  * [gh pr](https://cli.github.com/manual/gh_pr_create) - gh pr create.
-  * [Authentication in a workflow](https://docs.github.com/en/actions/reference/authentication-in-a-workflow)
-  * [Encrypted secrets](https://docs.github.com/en/actions/reference/encrypted-secrets)
-  * [Introduction to GitHub Actions](https://docs.github.com/en/actions/learn-github-actions/introduction-to-github-actions)
