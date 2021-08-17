@@ -8,10 +8,4 @@ cask "fonts" do
   for f in Dir["Fonts/*"] do
     font f
   end
-
-  test do
-    for f in Dir["Fonts/*"] do
-        system "test", "-f", "#{caskroom_path}/fonts/"f
-    end
-  end
 end

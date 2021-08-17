@@ -4,11 +4,6 @@
     <content url="file://$MODULE_DIR$" />
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="fonts" />
-    <orderEntry type="module" module-name="g" />
-    <orderEntry type="module" module-name="icons-mac" />
-    <orderEntry type="module" module-name="paper" />
-    <orderEntry type="module" module-name="scripts" />
   </component>
   <component name="PyDocumentationSettings">
     <option name="format" value="GOOGLE" />

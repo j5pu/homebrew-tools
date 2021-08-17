@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="GitSharedSettings">
+    <option name="FORCE_PUSH_PROHIBITED_PATTERNS">
+      <list>
+        <option value="main" />
+      </list>
+    </option>
+  </component>
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
-    <mapping directory="$USER_HOME$/g" vcs="Git" />
-    <mapping directory="$USER_HOME$/icons-mac" vcs="Git" />
-    <mapping directory="$USER_HOME$/paper" vcs="Git" />
-    <mapping directory="$USER_HOME$/scripts" vcs="Git" />
   </component>
 </project>

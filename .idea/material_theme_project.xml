@@ -4,5 +4,8 @@
     <option name="highlightColorEnabled" value="true" />
     <option name="isActive" value="true" />
     <option name="isHighlightColorEnabled" value="true" />
+    <option name="useProjectFrame" value="true" />
+    <option name="highlightColor" value="04577e" />
+    <option name="projectFrameColor" value="04577e" />
   </component>
 </project>
