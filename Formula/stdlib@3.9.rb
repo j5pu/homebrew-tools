@@ -13,4 +13,5 @@ class Dev < Formula
 
   depends_on "python@3.9"
 
+  inreplace "from #{name} import *", /from stdlib import/, "replace by #{bin}/tool"
 end
