@@ -1,0 +1,13 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="docker-osx-auto" type="docker-deploy" factoryName="docker-image" singleton="false" server-name="macos">
+    <deployment type="docker-image">
+      <settings>
+        <option name="imageTag" value="sickcodes/docker-osx:auto" />
+        <option name="containerName" value="docker-osx-auto" />
+        <option name="commandLineOptions" value="-it --device /dev/kvm -p 50922:10022 -v /tmp/.X11-unix:/tmp/.X11-unix -e &quot;DISPLAY=${DISPLAY:-:0.0}&quot;" />
+        <option name="showCommandPreview" value="true" />
+      </settings>
+    </deployment>
+    <method v="2" />
+  </configuration>
+</component>

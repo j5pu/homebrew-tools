@@ -263,6 +263,45 @@ access:
   password: uRJ5WhRmSZF4dgkk82Kp
 ````
 
+## Ruby 
+
+### Path & Install
+
+* `Dir` points to: `Tap` before: `bin.install`.
+````ruby
+Dir["Formula/*"].each do |file|
+  src = File.basename(file)                 #=> "ruby.rb"
+  dest = File.basename(file, ".*")          #=> "ruby"
+  ohai "file: '#{file}', src: '#{src}', dest: '#{dest}'"
+end
+````
+
+* `prefix` directory is empty before: `bin.install`.
+````ruby
+opoo Dir.children(prefix)  # prefix = /usr/local/Cellar/critic/8238
+````
+
+* When your code in the `install` function is run, the current working directory is set to the extracted tarball.
+During `bin.install`, `prefix.install` or
+[variables-for-directory-locations](https://docs.brew.sh/Formula-Cookbook#variables-for-directory-locations.
+
+````ruby
+prefix.install Dir["output/*"]
+prefix.install "file1", "file2"
+bin.install "foo.py" => "foo"
+````
+
+* `buildpath` to loop over repository, before the `install` function.
+````ruby
+opoo Dir.children(buildpath)
+Dir["#{buildpath}/bin/*"].each do |file|
+  src = "bin/#{File.basename(file)}"      #=> "bin/ruby.sh"
+  dest = File.basename(file, ".*")        #=> "ruby"
+  ohai "file: '#{file}', src: '#{src}', dest: '#{dest}'"
+  bin.install src => dest
+end
+````
+
 ## See also
 
 ### GitHub Actions and Apps
