@@ -1,0 +1,8 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="run.sh example_formula" type="BashProRunConfiguration" folderName="test" singleton="false">
+    <option name="scriptParameters" value="example_formula" />
+    <option name="scriptPath" value="$PROJECT_DIR$/test/run.sh" />
+    <RunnerSettings bashdbVersion="Automatic" bashPathMapper="Automatic" RunnerId="pro.bashsupport.shDebugRunner" />
+    <method v="2" />
+  </configuration>
+</component>
