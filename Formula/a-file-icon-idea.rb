@@ -5,11 +5,6 @@ class AFileIconIdea < Formula
   sha256 "586d3aef13e108809da35c1e42e8dd8426e4001e3c070a26a636659fd2b2b856"
   license "MIT"
 
-  depends_on "java"
-  depends_on "openjdk"
-  depends_on "gradle"
-  depends_on "gradle-completion"
-
   def install
     etc.install "a-file-icon-idea"
   end

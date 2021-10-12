@@ -21,5 +21,5 @@ cask "fonts" do
   font "Fonts/Quicksand-LightItalic.otf"
   font "Fonts/Quicksand-Regular.otf"
   font "Fonts/Quicksand_Dash.otf"
-  # font "Fonts/Rodina-Regular.otf"
+  font "Fonts/Rodina-Regular.otf"
 end
