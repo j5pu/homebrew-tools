@@ -10,16 +10,6 @@ class AFileIconIdea < Formula
   depends_on "gradle"
   depends_on "gradle-completion"
 
-  on_macos do
-    depends_on "adoptopenjdk"
-    depends_on "adoptopenjdk8"
-  end
-
-  on_linux do
-    depends_on "openjdk@11"
-    depends_on "openjdk@8"
-  end
-
   def install
     etc.install "a-file-icon-idea"
   end
